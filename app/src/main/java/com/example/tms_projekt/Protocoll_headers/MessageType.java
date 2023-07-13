@@ -1,4 +1,4 @@
-package Protocoll_headers;
+package com.example.tms_projekt.Protocoll_headers;
 
 public enum MessageType {
     RREQ_t("0"),

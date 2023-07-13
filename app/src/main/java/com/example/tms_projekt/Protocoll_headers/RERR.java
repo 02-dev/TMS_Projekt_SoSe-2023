@@ -1,7 +1,6 @@
-package Protocoll_headers;
+package com.example.tms_projekt.Protocoll_headers;
 
 import static com.example.tms_projekt.GlobalFunctions.asciiToByte;
-import static Protocoll_headers.MessageType.RERR_t;
 
 import java.util.Arrays;
 
@@ -19,7 +18,7 @@ public class RERR {
     }
 
     public RERR (String targetNode) {
-        type = asciiToByte(RERR_t.getType());
+        type = asciiToByte(MessageType.RERR_t.getType());
         //TODO:
     }
 

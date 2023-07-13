@@ -1,7 +1,6 @@
-package Protocoll_headers;
+package com.example.tms_projekt.Protocoll_headers;
 
 import static com.example.tms_projekt.GlobalFunctions.asciiToByte;
-import static Protocoll_headers.MessageType.DATA_ACK;
 
 import com.example.tms_projekt.GlobalFunctions;
 
@@ -21,7 +20,7 @@ public class DataAck {
     }
 
     public DataAck (byte[] destAddr, byte[] dataSeqNum) {
-        type = asciiToByte(DATA_ACK.getType());
+        type = asciiToByte(MessageType.DATA_ACK.getType());
         this.destAddr = destAddr;
         origAddr = asciiToByte(GlobalFunctions.origAddr);
         this.dataSeqNum = dataSeqNum;

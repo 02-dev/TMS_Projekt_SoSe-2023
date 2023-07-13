@@ -1,10 +1,9 @@
-package Protocoll_headers;
+package com.example.tms_projekt.Protocoll_headers;
 
 import static com.example.tms_projekt.GlobalFunctions.asciiToByte;
 import static com.example.tms_projekt.GlobalFunctions.byteToAscii;
 import static com.example.tms_projekt.GlobalFunctions.decimalToHex;
 import static com.example.tms_projekt.GlobalFunctions.hexToDecimal;
-import static Protocoll_headers.MessageType.DATA_t;
 
 import com.example.tms_projekt.GlobalFunctions;
 
@@ -26,7 +25,7 @@ public class Data {
     }
 
     public Data (String targetNode, String payload) {
-        type = asciiToByte(DATA_t.getType());
+        type = asciiToByte(MessageType.DATA_t.getType());
         destAddr = asciiToByte(targetNode);
         origAddr = asciiToByte(GlobalFunctions.origAddr);
         dataSeqNum = asciiToByte(decimalToHex(String.valueOf(payload.length())));

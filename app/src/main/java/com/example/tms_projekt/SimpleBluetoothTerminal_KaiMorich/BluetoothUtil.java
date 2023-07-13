@@ -1,6 +1,4 @@
-package com.example.tms_projekt;
-
-
+package com.example.tms_projekt.SimpleBluetoothTerminal_KaiMorich;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -14,6 +12,8 @@ import android.os.Build;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.fragment.app.Fragment;
+
+import com.example.tms_projekt.R;
 
 public class BluetoothUtil {
 
@@ -71,7 +71,7 @@ public class BluetoothUtil {
         if(missingPermissions) {
             if (showRationale) {
                 showRationaleDialog(fragment, (dialog, which) ->
-                        requestPermissionLauncher.launch(Manifest.permission.BLUETOOTH_CONNECT));
+                requestPermissionLauncher.launch(Manifest.permission.BLUETOOTH_CONNECT));
             } else {
                 requestPermissionLauncher.launch(Manifest.permission.BLUETOOTH_CONNECT);
             }

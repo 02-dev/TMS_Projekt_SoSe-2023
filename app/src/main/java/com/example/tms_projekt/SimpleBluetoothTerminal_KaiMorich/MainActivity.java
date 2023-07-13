@@ -1,12 +1,10 @@
-package com.example.tms_projekt;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.widget.Toolbar;
+package com.example.tms_projekt.SimpleBluetoothTerminal_KaiMorich;
 
 import android.os.Bundle;
 
-import com.example.tms_projekt.SimpleBluetoothTerminal_KaiMorich.DevicesFragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
@@ -34,18 +32,3 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         return true;
     }
 }
-
-
-
-
-
-
-/*
-public class MainActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
-}*/
