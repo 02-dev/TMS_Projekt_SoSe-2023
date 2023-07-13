@@ -58,7 +58,7 @@ public class BluetoothUtil {
         builder.setNegativeButton("Cancel", null);
         builder.setPositiveButton("Settings", (dialog, which) ->
                 fragment.startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                        Uri.parse("package:" + BuildConfig.APPLICATION_ID))));
+                        Uri.parse("package:" + "com.example.tms_projekt"))));
         builder.show();
     }
 
