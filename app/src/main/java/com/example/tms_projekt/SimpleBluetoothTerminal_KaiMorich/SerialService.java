@@ -16,6 +16,8 @@ import android.os.Looper;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import com.example.tms_projekt.R;
+
 import java.io.IOException;
 import java.util.ArrayDeque;
 

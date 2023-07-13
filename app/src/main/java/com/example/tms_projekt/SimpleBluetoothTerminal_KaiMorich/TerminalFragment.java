@@ -28,6 +28,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.tms_projekt.R;
+
 import java.util.ArrayDeque;
 
 public class TerminalFragment extends Fragment implements ServiceConnection, SerialListener {
