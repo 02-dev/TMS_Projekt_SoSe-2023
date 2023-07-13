@@ -35,14 +35,11 @@ import java.util.ArrayDeque;
 public class TerminalFragment extends Fragment implements ServiceConnection, SerialListener {
 
     private enum Connected { False, Pending, True }
-
     private String deviceAddress;
     private SerialService service;
-
     private TextView receiveText;
     private TextView sendText;
     private TextUtil.HexWatcher hexWatcher;
-
     private Connected connected = Connected.False;
     private boolean initialStart = true;
     private boolean hexEnabled = false;

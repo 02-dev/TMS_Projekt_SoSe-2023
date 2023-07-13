@@ -7,9 +7,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
 import android.widget.TextView;
-
 import androidx.annotation.ColorInt;
-
 import java.io.ByteArrayOutputStream;
 
 final class TextUtil {
