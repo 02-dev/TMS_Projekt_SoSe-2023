@@ -136,6 +136,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
         View sendBtn = view.findViewById(R.id.send_btn);
         sendBtn.setOnClickListener(v -> send(sendText.getText().toString()));
+
+        // TODO: add option to select target
+        // TODO: create thread which sends hello message in regular interval
         return view;
     }
 
@@ -196,6 +199,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         service.disconnect();
     }
 
+
+    // TODO: Implement Functionality for project
     private void send(String str) {
         if(connected != Connected.True) {
             Toast.makeText(getActivity(), "not connected", Toast.LENGTH_SHORT).show();

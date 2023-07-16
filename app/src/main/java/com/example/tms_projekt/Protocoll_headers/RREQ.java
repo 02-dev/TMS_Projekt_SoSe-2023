@@ -8,60 +8,78 @@ import com.example.tms_projekt.GlobalFunctions;
 import java.util.Arrays;
 
 public class RREQ {
-    private byte[] type;
-    private byte[] hopCount;
-    private byte[] rreqID;
-    private byte[] destAddr;
-    private byte[] destSeqNum;
-    private byte[] origAddr;
-    private byte[] origSeqNum;
 
-    public RREQ (byte[] incomingRREQ) {
-        type[0] = incomingRREQ[0];
-        hopCount = Arrays.copyOfRange(incomingRREQ, 1, 2);
-        rreqID = Arrays.copyOfRange(incomingRREQ, 3, 6);
-        destAddr = Arrays.copyOfRange(incomingRREQ, 7, 10);
-        destSeqNum = Arrays.copyOfRange(incomingRREQ, 11, 14);
-        origAddr = Arrays.copyOfRange(incomingRREQ, 15, 18);
-        origSeqNum = Arrays.copyOfRange(incomingRREQ, 19, 22);
+    // RREQ are being broadcast to all known neighbors.
+    private String type; // Value: ‘0’, Number of Characters: 1
+    private String undefSeqNum; // Value: 'Y' for undefined, 'N' for defined, Number of Characters: 1
+    private String hopCount; // Value: 0-255, Number of Characters: 2
+    private String rreqID; // Value: 0-65536, Number of Characters: 4
+    private String destAddr; // Value: 0-65536, Number of Characters: 4
+    private String destSeqNum; // Value: 0-65536, Number of Characters: 4
+    private String origAddr; // Value: 0-65536, Number of Characters: 4
+    private String origSeqNum; // Value: 0-65536, Number of Characters: 4
+
+    public RREQ (String incomingRREQ) {
+        type = incomingRREQ.substring(0,1);
+        undefSeqNum = incomingRREQ.substring(1,2);
+        hopCount = incomingRREQ.substring(2,4);
+        rreqID = incomingRREQ.substring(4,8);
+        destAddr = incomingRREQ.substring(8,12);
+        destSeqNum = incomingRREQ.substring(12,16);
+        origAddr = incomingRREQ.substring(16,20);
+        origSeqNum = incomingRREQ.substring(20,24);
     }
 
-    public RREQ (String targetNode) {
-        type = asciiToByte(MessageType.RREQ_t.getType());
-        hopCount = asciiToByte(getTargetNodeFromRoutingTable(targetNode)[2]);
-        // TODO: rreqID
-        destAddr = asciiToByte(targetNode);
-        destSeqNum = asciiToByte(getTargetNodeFromRoutingTable(targetNode)[4]);
-        origAddr = asciiToByte(GlobalFunctions.origAddr);
-        origSeqNum = asciiToByte(String.valueOf(GlobalFunctions.origSeqNum));
+
+    // TODO: rreqID und origSeqNum in hex umwandeln und auffüllen - bestenfalls in GlobalFunctions
+    public RREQ (String targetNode, String rreqID) {
+        type = MessageType.RREQ_t.getType();
+        hopCount = getTargetNodeFromRoutingTable(targetNode)[2];
+        this.rreqID = rreqID;
+        destAddr = targetNode;
+        destSeqNum = getTargetNodeFromRoutingTable(targetNode)[3];
+        origAddr = GlobalFunctions.origAddr;
+        origSeqNum = String.valueOf(GlobalFunctions.origSeqNum);
     }
 
-    public byte[] getType() {
+    // TODO: benötigt weiteren Constructor für RREQ an Nodes, welche nicht in Routing Table sind.
+
+    public String getType() {
         return type;
     }
 
-    public byte[] getHopCount() {
+    public String getUndefSeqNum() { return undefSeqNum; }
+
+    public String getHopCount() {
         return hopCount;
     }
 
-    public byte[] getRreqID() {
+    public String getRreqID() {
         return rreqID;
     }
 
-    public byte[] getDestAddr() {
+    public String getDestAddr() {
         return destAddr;
     }
 
-    public byte[] getDestSeqNum() {
+    public String getDestSeqNum() {
         return destSeqNum;
     }
 
-    public byte[] getOrigAddr() {
+    public String getOrigAddr() {
         return origAddr;
     }
 
-    public byte[] getOrigSeqNum() {
+    public String getOrigSeqNum() {
         return origSeqNum;
     }
+
+    public int getHopCountAsDecimal() { return Integer.parseInt(hopCount, 16); }
+
+    public int getRreqIDAsDecimal() { return Integer.parseInt(rreqID, 16); }
+
+    public int getDestSeqNumAsDecimal() { return Integer.parseInt(destSeqNum, 16); }
+
+    public int getOrigSeqNumAsDecimal() { return Integer.parseInt(origSeqNum, 16); }
 
 }

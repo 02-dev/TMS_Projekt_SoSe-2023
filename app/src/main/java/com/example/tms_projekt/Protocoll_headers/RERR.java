@@ -5,36 +5,25 @@ import static com.example.tms_projekt.GlobalFunctions.asciiToByte;
 import java.util.Arrays;
 
 public class RERR {
-    private byte[] type;
-    private byte[] destCount;
-    private byte[] unreachDestAddr;
-    private byte[] unreachDestSeqNum;
+    private String type; // Value: '2', Number of Characters: 1
+    private String unreachDestAddr; // Value: 0-65536, Number of Characters: 4
 
-    public RERR (byte[] incomingRERR) {
-        type[0] = incomingRERR[0];
-        destCount = Arrays.copyOfRange(incomingRERR, 1, 2);
-        unreachDestAddr = Arrays.copyOfRange(incomingRERR, 3, 6);
-        unreachDestSeqNum = Arrays.copyOfRange(incomingRERR, 7, 10);
+    public RERR (String incomingRERR) {
+        type = incomingRERR.substring(0,1);
+        unreachDestAddr = incomingRERR.substring(1,5);
     }
 
     public RERR (String targetNode) {
-        type = asciiToByte(MessageType.RERR_t.getType());
-        //TODO:
+        type = MessageType.RERR_t.getType();
+        //TODO: List mit letzten Ankuntszeiten von Hello-Messages bekannter Knoten
+        unreachDestAddr = targetNode;
     }
 
-    public byte[] getType() {
+    public String getType() {
         return type;
     }
 
-    public byte[] getDestCount() {
-        return destCount;
-    }
-
-    public byte[] getUnreachDestAddr() {
+    public String getUnreachDestAddr() {
         return unreachDestAddr;
-    }
-
-    public byte[] getUnreachDestSeqNum() {
-        return unreachDestSeqNum;
     }
 }

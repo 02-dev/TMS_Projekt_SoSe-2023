@@ -4,8 +4,7 @@ public enum MessageType {
     RREQ_t("0"),
     RREP_t("1"),
     RERR_t("2"),
-    DATA_t("3"),
-    DATA_ACK("4");
+    DATA_t("3");
 
     private String type;
 

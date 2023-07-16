@@ -53,7 +53,7 @@ public class GlobalFunctions {
         return charset.decode(ByteBuffer.wrap(byteArr)).toString();
     }
 
-    // String[]: 0 = Node address/goal, 1 = Hop, 2 = Hop Count, 3 = Pre(vious user of route),  4 = SeqNum
+    // String[]: 0 = Node address/goal, 1 = Hop, 2 = Hop Count, 3 = SeqNum
     public static List<String[]> routingTable = new ArrayList<>();
 
     public static String[] getTargetNodeFromRoutingTable(String targetNode) {
@@ -61,5 +61,17 @@ public class GlobalFunctions {
             if (routingTable.get(i)[0] == targetNode) return routingTable.get(i);
         }
         return new String[0];
+    }
+
+    public static void addTargetNodeToRoutingTable(String targetNodeAddr, String hop, String hopCount, String seqNum) {
+        routingTable.add(new String[]{targetNodeAddr, hop, hopCount, seqNum});
+    }
+
+    public static int getDecimalHopCountOfTargetNodeFromRoutingTable (String targetNode) {
+        return Integer.parseInt(getTargetNodeFromRoutingTable(targetNode)[2], 16);
+    }
+
+    public static int getDecimalSeqNumOfTargetNodeFromRoutingTable (String targetNode) {
+        return Integer.parseInt(getTargetNodeFromRoutingTable(targetNode)[3], 16);
     }
 }

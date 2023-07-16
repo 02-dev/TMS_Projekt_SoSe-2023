@@ -10,45 +10,38 @@ import com.example.tms_projekt.GlobalFunctions;
 import java.util.Arrays;
 
 public class Data {
-    private byte[] type;
-    private byte[] destAddr;
-    private byte[] origAddr;
-    private byte[] dataSeqNum;
-    private byte[] payload;
+    private String type; // Value: '3', Number of Characters: 1
+    private String destAddr; // Value: 0-65536, Number of Characters: 4
+    private String origAddr; // Value: 0-65536, Number of Characters: 4
+    private String payload; // Value: 0-65536, Number of Characters: 0-241
 
-    public Data (byte[] incomingData) {
-        type[0] = incomingData[0];
-        destAddr = Arrays.copyOfRange(incomingData, 1, 4);
-        origAddr = Arrays.copyOfRange(incomingData, 5, 8);
-        dataSeqNum = Arrays.copyOfRange(incomingData, 9, 10);
-        payload = Arrays.copyOfRange(incomingData, 11, Integer.valueOf(hexToDecimal(byteToAscii(dataSeqNum))) + 10);
+    public Data (String incomingData) {
+        type = incomingData.substring(0,1);
+        destAddr = incomingData.substring(1,5);
+        origAddr = incomingData.substring(5,9);
+        payload = incomingData.substring(9);
     }
 
     public Data (String targetNode, String payload) {
-        type = asciiToByte(MessageType.DATA_t.getType());
-        destAddr = asciiToByte(targetNode);
-        origAddr = asciiToByte(GlobalFunctions.origAddr);
-        dataSeqNum = asciiToByte(decimalToHex(String.valueOf(payload.length())));
-        this.payload = asciiToByte(payload);
+        type = MessageType.DATA_t.getType();
+        destAddr = targetNode;
+        origAddr = GlobalFunctions.origAddr;
+        this.payload = payload;
     }
 
-    public byte[] getType() {
+    public String getType() {
         return type;
     }
 
-    public byte[] getDestAddr() {
+    public String getDestAddr() {
         return destAddr;
     }
 
-    public byte[] getOrigAddr() {
+    public String getOrigAddr() {
         return origAddr;
     }
 
-    public byte[] getDataSeqNum() {
-        return dataSeqNum;
-    }
-
-    public byte[] getPayload() {
+    public String getPayload() {
         return payload;
     }
 }
