@@ -1,10 +1,5 @@
 package com.example.tms_projekt.Protocoll_headers;
 
-import static com.example.tms_projekt.GlobalFunctions.asciiToByte;
-import static com.example.tms_projekt.GlobalFunctions.byteToAscii;
-import static com.example.tms_projekt.GlobalFunctions.decimalToHex;
-import static com.example.tms_projekt.GlobalFunctions.hexToDecimal;
-
 import com.example.tms_projekt.GlobalFunctions;
 
 import java.util.Arrays;

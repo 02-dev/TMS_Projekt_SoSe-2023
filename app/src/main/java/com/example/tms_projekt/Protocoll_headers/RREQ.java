@@ -1,11 +1,11 @@
 package com.example.tms_projekt.Protocoll_headers;
 
-import static com.example.tms_projekt.GlobalFunctions.asciiToByte;
+import static com.example.tms_projekt.GlobalFunctions.getOrigSeqNumInHex;
+import static com.example.tms_projekt.GlobalFunctions.getRoutRequestIDInHex;
 import static com.example.tms_projekt.GlobalFunctions.getTargetNodeFromRoutingTable;
+import static com.example.tms_projekt.GlobalFunctions.increaseHopCountForIncomingRREQAndRREP;
 
 import com.example.tms_projekt.GlobalFunctions;
-
-import java.util.Arrays;
 
 public class RREQ {
 
@@ -22,7 +22,7 @@ public class RREQ {
     public RREQ (String incomingRREQ) {
         type = incomingRREQ.substring(0,1);
         undefSeqNum = incomingRREQ.substring(1,2);
-        hopCount = incomingRREQ.substring(2,4);
+        hopCount = increaseHopCountForIncomingRREQAndRREP(incomingRREQ.substring(2,4));
         rreqID = incomingRREQ.substring(4,8);
         destAddr = incomingRREQ.substring(8,12);
         destSeqNum = incomingRREQ.substring(12,16);
@@ -30,19 +30,27 @@ public class RREQ {
         origSeqNum = incomingRREQ.substring(20,24);
     }
 
-
-    // TODO: rreqID und origSeqNum in hex umwandeln und auffüllen - bestenfalls in GlobalFunctions
-    public RREQ (String targetNode, String rreqID) {
-        type = MessageType.RREQ_t.getType();
-        hopCount = getTargetNodeFromRoutingTable(targetNode)[2];
-        this.rreqID = rreqID;
-        destAddr = targetNode;
-        destSeqNum = getTargetNodeFromRoutingTable(targetNode)[3];
-        origAddr = GlobalFunctions.origAddr;
-        origSeqNum = String.valueOf(GlobalFunctions.origSeqNum);
+    public RREQ (String targetNode, Boolean inRoutingTable) {
+        if (inRoutingTable) {
+            type = MessageType.RREQ_t.getType();
+            undefSeqNum = "N";
+            hopCount = "00";
+            rreqID = getRoutRequestIDInHex();
+            destAddr = targetNode;
+            destSeqNum = getTargetNodeFromRoutingTable(targetNode)[3];
+            origAddr = GlobalFunctions.origAddr;
+            origSeqNum = getOrigSeqNumInHex();
+        } else {
+            type = MessageType.RREQ_t.getType();
+            undefSeqNum = "Y";
+            hopCount = "00";
+            rreqID = getRoutRequestIDInHex();
+            destAddr = targetNode;
+            destSeqNum = "0000";
+            origAddr = GlobalFunctions.origAddr;
+            origSeqNum = getOrigSeqNumInHex();
+        }
     }
-
-    // TODO: benötigt weiteren Constructor für RREQ an Nodes, welche nicht in Routing Table sind.
 
     public String getType() {
         return type;
@@ -81,5 +89,9 @@ public class RREQ {
     public int getDestSeqNumAsDecimal() { return Integer.parseInt(destSeqNum, 16); }
 
     public int getOrigSeqNumAsDecimal() { return Integer.parseInt(origSeqNum, 16); }
+
+    public String buildRREQ() {
+        return type + undefSeqNum + hopCount + rreqID + destAddr + destSeqNum + origAddr + origSeqNum;
+    }
 
 }

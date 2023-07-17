@@ -1,9 +1,5 @@
 package com.example.tms_projekt.Protocoll_headers;
 
-import static com.example.tms_projekt.GlobalFunctions.asciiToByte;
-
-import java.util.Arrays;
-
 public class RERR {
     private String type; // Value: '2', Number of Characters: 1
     private String unreachDestAddr; // Value: 0-65536, Number of Characters: 4
@@ -13,7 +9,7 @@ public class RERR {
         unreachDestAddr = incomingRERR.substring(1,5);
     }
 
-    public RERR (String targetNode) {
+    public RERR (String targetNode, Boolean neededForConstructor) {
         type = MessageType.RERR_t.getType();
         //TODO: List mit letzten Ankuntszeiten von Hello-Messages bekannter Knoten
         unreachDestAddr = targetNode;
@@ -25,5 +21,9 @@ public class RERR {
 
     public String getUnreachDestAddr() {
         return unreachDestAddr;
+    }
+
+    public String buildRERR () {
+        return type + unreachDestAddr;
     }
 }
