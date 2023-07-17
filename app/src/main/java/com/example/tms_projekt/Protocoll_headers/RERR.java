@@ -6,7 +6,7 @@ public class RERR {
 
     public RERR (String incomingRERR) {
         type = incomingRERR.substring(0,1);
-        unreachDestAddr = incomingRERR.substring(1,5);
+        unreachDestAddr = incomingRERR.substring(1);
     }
 
     public RERR (String targetNode, Boolean neededForConstructor) {

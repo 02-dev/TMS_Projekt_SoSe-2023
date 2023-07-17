@@ -2,8 +2,6 @@ package com.example.tms_projekt.Protocoll_headers;
 
 import com.example.tms_projekt.GlobalFunctions;
 
-import java.util.Arrays;
-
 public class Data {
     private String type; // Value: '3', Number of Characters: 1
     private String destAddr; // Value: 0-65536, Number of Characters: 4
@@ -38,5 +36,9 @@ public class Data {
 
     public String getPayload() {
         return payload;
+    }
+
+    public String buildData() {
+        return type + destAddr + origAddr + payload;
     }
 }

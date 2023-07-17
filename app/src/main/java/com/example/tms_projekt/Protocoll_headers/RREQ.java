@@ -27,7 +27,7 @@ public class RREQ {
         destAddr = incomingRREQ.substring(8,12);
         destSeqNum = incomingRREQ.substring(12,16);
         origAddr = incomingRREQ.substring(16,20);
-        origSeqNum = incomingRREQ.substring(20,24);
+        origSeqNum = incomingRREQ.substring(20);
     }
 
     public RREQ (String targetNode, Boolean inRoutingTable) {

@@ -25,7 +25,7 @@ public class RREP {
         hopCount = increaseHopCountForIncomingRREQAndRREP(incomingRREP.substring(1,3));
         destAddr = incomingRREP.substring(3,7);
         destSeqNum = incomingRREP.substring(7,11);
-        origAddr = incomingRREP.substring(11,15);
+        origAddr = incomingRREP.substring(11);
     }
 
     public RREP (String destAddr, String origAddr) {
